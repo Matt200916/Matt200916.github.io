@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grace Hopper | Layout Clone</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0 auto;
+      max-width: 1280px;
+      padding: 0 1.25rem;
+      color: #202122;
+      font: 1rem/1.6 system-ui, sans-serif;
+    }
+    h1, h2 { font-family: Georgia, serif; font-weight: normal; }
+    h1 { margin: 0; font-size: 2rem; }
+    h2 { margin: 1.1rem 0 0.5rem; font-size: 1.5rem; }
+    p { margin: 0 0 0.85rem; }
+    a { color: #285795; }
+
+    /* Flexbox puts the site name, search field, and button on one row. */
+    .site-header, .site-search, .article-tabs {
+      display: flex;
+      align-items: center;
+    }
+    .site-header {
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      padding: 0.75rem 0 1.75rem;
+    }
+    .wordmark { font: 1.45rem Georgia, serif; font-variant: small-caps; }
+    .site-search { flex: 1 1 15rem; max-width: 29rem; }
+    .site-search input {
+      min-width: 0;
+      width: 100%;
+      padding: 0.4rem 0.65rem;
+      border: 1px solid #72777d;
+      font: inherit;
+    }
+    .site-search button {
+      padding: 0.4rem 0.75rem;
+      border: 1px solid #72777d;
+      border-left: 0;
+      background: #f8f9fa;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    /* The middle column grows while the two side columns stay narrow. */
+    .page-grid {
+      display: grid;
+      grid:
+        "contents story appearance"
+        / 10rem minmax(0, 1fr) 10rem;
+      align-items: start;
+      gap: 1.75rem;
+    }
+    .contents { grid-area: contents; }
+    .story { grid-area: story; }
+    .appearance { grid-area: appearance; }
+    .contents, .appearance { padding-top: 2.7rem; font-size: 0.875rem; }
+    .contents h2, .appearance h2 {
+      margin: 0 0 0.45rem;
+      border-bottom: 1px solid #eaecf0;
+      font: 600 0.9rem/1.8 system-ui, sans-serif;
+    }
+    .contents ul { list-style: none; padding: 0; margin: 0; }
+    .contents li { margin-bottom: 0.35rem; }
+
+    .article-tabs {
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      border-block: 1px solid #c8ccd1;
+      padding-block: 0.25rem;
+      margin: 0.2rem 0 0.55rem;
+      font-size: 0.875rem;
+    }
+    .source-credit { font-size: 0.875rem; }
+
+    /* The article opening and profile box are a second, nested grid. */
+    .intro-grid {
+      display: grid;
+      grid:
+        "opening profile"
+        / minmax(0, 1fr) minmax(150px, 36%);
+      align-items: start;
+      gap: 1rem;
+    }
+    .opening { grid-area: opening; }
+    .profile {
+      grid-area: profile;
+      padding: 0.55rem;
+      border: 1px solid #a2a9b1;
+      background: #f8f9fa;
+      font-size: 0.875rem;
+    }
+    .profile h2 { margin: 0 0 0.4rem; text-align: center; }
+    .profile figure { margin: 0 0 0.75rem; text-align: center; }
+    .portrait-placeholder {
+      width: 90%;
+      max-width: 15rem;
+      aspect-ratio: 3 / 4;
+      margin: 0 auto;
+      background: #dfe2e6;
+    }
+    .profile dl { margin: 0; }
+    .profile dt { font-weight: 600; }
+    .profile dd { margin: 0 0 0.4rem; }
+    .story > section h2 { border-bottom: 1px solid #c8ccd1; }
+    footer {
+      margin-top: 1.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #c8ccd1;
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 840px) {
+      .page-grid {
+        grid:
+          "contents story"
+          "appearance story"
+          / 8rem minmax(0, 1fr);
+        grid-template-rows: min-content 1fr;
+        gap: 1rem;
+      }
+      .appearance { padding-top: 0; }
+    }
+    @media (max-width: 580px) {
+      body { padding-inline: 1rem; }
+      .page-grid {
+        grid:
+          "contents"
+          "story"
+          "appearance"
+          / minmax(0, 1fr);
+      }
+      .contents { padding-top: 0; }
+      .intro-grid {
+        grid:
+          "opening"
+          "profile"
+          / minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <strong class="wordmark">Wikipedia</strong>
+    <form class="site-search" role="search" action="https://en.wikipedia.org/w/index.php">
+      <input type="search" name="search" aria-label="Search Wikipedia" placeholder="Search Wikipedia">
+      <button type="submit">Search</button>
+    </form>
+  </header>
+
+  <main class="page-grid">
+    <nav class="contents" aria-label="Contents">
+      <h2>Contents</h2>
+      <ul>
+        <li><a href="#early-life">Early life and education</a></li>
+        <li><a href="#career">Career</a></li>
+        <li><a href="#legacy">Legacy</a></li>
+      </ul>
+    </nav>
+
+    <article class="story">
+      <h1>Grace Hopper</h1>
+      <div class="article-tabs">
+        <span>Article · Talk</span>
+        <span>Read · Edit · View history</span>
+      </div>
+      <p class="source-credit">Layout cloned from <a href="https://en.wikipedia.org/wiki/Grace_Hopper">Wikipedia’s Grace Hopper article</a>.</p>
+
+      <div class="intro-grid">
+        <div class="opening">
+          <p>Grace Hopper was an American computer scientist and a United States Navy officer. She worked on early computers, developed a compiler, and helped shape the COBOL programming language.</p>
+          <p>During World War II, she worked with the Harvard Mark I computer. She later worked on UNIVAC and advocated for programming languages that were easier for people to read.</p>
+        </div>
+        <aside class="profile" aria-labelledby="profile-heading">
+          <h2 id="profile-heading">Grace Hopper</h2>
+          <figure>
+            <div class="portrait-placeholder" aria-hidden="true"></div>
+            <figcaption>Portrait placeholder</figcaption>
+          </figure>
+          <dl>
+            <dt>Born</dt><dd>New York City</dd>
+            <dt>Known for</dt><dd>Early compilers and COBOL</dd>
+            <dt>Service</dt><dd>United States Navy</dd>
+          </dl>
+        </aside>
+      </div>
+
+      <section id="early-life">
+        <h2>Early life and education</h2>
+        <p>Hopper studied mathematics and physics at Vassar College and earned a doctorate in mathematics at Yale.</p>
+      </section>
+      <section id="career">
+        <h2>Career</h2>
+        <p>Her work included the Harvard Mark I, UNIVAC, and early programming languages.</p>
+      </section>
+      <section id="legacy">
+        <h2>Legacy</h2>
+        <p>Her work influenced generations of computer scientists.</p>
+      </section>
+    </article>
+
+    <aside class="appearance" aria-labelledby="appearance-heading">
+      <h2 id="appearance-heading">Appearance</h2>
+      <p><strong>Text</strong><br>Small / Standard / Large</p>
+      <p><strong>Width</strong><br>Standard / Wide</p>
+      <p><strong>Color</strong><br>Automatic / Light / Dark</p>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Wikipedia · Privacy policy · About Wikipedia</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/gh/gracehoppercenter/validate@1.0.5/validate.js"></script>
+</body>
+</html>
+
